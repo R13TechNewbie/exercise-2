@@ -9,33 +9,88 @@
     <title>Kalkulator dengan Javascript</title>
 </head>
 <body>
-        <script type="text/javascript" src="javascript.js"></script>
+    <!--<script type="text/javascript" src="javascript.js"></script>-->
     <div>
         <h1>Kalkulator</h1><br>
     </div>
     <div class="kalkulator">
         <div class="layar-kalkulator">Angka Kalkulator Muncul Disini</div>
         <div class="tombol-kalkulator">
-            <button type="button" class="btn btn-primary">1</button>
-            <button type="button" class="btn btn-primary">2</button>
-            <button type="button" class="btn btn-primary">3</button>
-            <button type="button" class="btn btn-primary">4</button>
-            <button type="button" class="btn btn-primary">5</button>
-            <button type="button" class="btn btn-primary">6</button>
-            <button type="button" class="btn btn-primary">7</button>
-            <button type="button" class="btn btn-primary">8</button>
-            <button type="button" class="btn btn-primary">9</button>
-            <button type="button" class="btn btn-primary">0</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="tambah">+</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="kurang">-</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="kali">x</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="bagi">/</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="modulo">%</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="desimal">.</button>
-            <button type="button" class="btn btn-secondary operasi" data-action="clear">AC</button>
-            <button type="button" class="btn btn-secondary" data-action="hitung">=</bustton>
+            <button class="btn btn-primary">1</button>
+            <button class="btn btn-primary">2</button>
+            <button class="btn btn-primary">3</button>
+            <button class="btn btn-primary">4</button>
+            <button class="btn btn-primary">5</button>
+            <button class="btn btn-primary">6</button>
+            <button class="btn btn-primary">7</button>
+            <button class="btn btn-primary">8</button>
+            <button class="btn btn-primary">9</button>
+            <button class="btn btn-primary">0</button>
+            <button class="btn btn-secondary operasi" data-action="tambah">+</button>
+            <button class="btn btn-secondary operasi" data-action="kurang">-</button>
+            <button class="btn btn-secondary operasi" data-action="kali">x</button>
+            <button class="btn btn-secondary operasi" data-action="bagi">/</button>
+            <button class="btn btn-secondary operasi" data-action="modulo">%</button>
+            <button class="btn btn-secondary operasi" data-action="desimal">.</button>
+            <button class="btn btn-secondary operasi" data-action="clear">AC</button>
+            <button class="btn btn-secondary" data-action="hitung">=</button>
         </div>    
     </div>
     
 </body>
 </html>
+<script>
+const kalkulator = document.querySelector('.kalkulator')
+const tombol = kalkulator.querySelector('.tombol-kalkulator')
+const layar = document.querySelector('.layar-kalkulator') 
+
+//if(tombol){
+  tombol.addEventListener('click', e => {
+    if (e.target.matches('button')) {
+        
+        const key = e.target
+        const action = key.dataset.action
+        const keyContent = key.textContent
+        const displayedNum = display.textContent
+
+        Array.from(key.parentNode.children)
+            .forEach(k => k.classlist.remove('is-depressed'))
+
+        if (!action) {
+          console.log('ini tombol angka')
+        }
+
+        if (
+          action === 'tambah' ||
+          action === 'kurang' ||
+          action === 'kali' ||
+          action === 'bagi' ||
+          action === 'modulo'
+        ) {
+          key.classList.add('is-depressed')
+          kalkulator.dataset.previousKeyType = 'operasi'
+        }
+
+        if (action === 'desimal') {
+          display.textContent = displayedNum + '.'
+        }
+
+        if (action === 'clear') {
+          console.log('ini tombol hapus')
+        }
+
+        if (action === 'hitung') {
+          console.log('tombol hitung')
+        }
+
+        if (!action) {
+            if (displayedNum === 'Angka Kalkulator Muncul Disini') {
+                display.textContent = keyContent
+            } else {
+                display.textContent = displayedNum + keyContent
+            }
+        }
+      }
+    });
+//}
+</script>
